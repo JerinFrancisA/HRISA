@@ -9,7 +9,6 @@ class InputBox extends StatelessWidget {
   final maxLength;
   final cap;
   final hintText;
-  final myController = TextEditingController();
 
   InputBox({
     @required this.text,
@@ -27,10 +26,6 @@ class InputBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        controller: myController,
-        onSaved: (x) {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text(myController.text)));
-        },
         textCapitalization: cap,
         style: kHrisaText.copyWith(
           fontSize: 20.0,
