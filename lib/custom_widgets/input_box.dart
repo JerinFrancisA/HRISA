@@ -9,6 +9,7 @@ class InputBox extends StatelessWidget {
   final maxLength;
   final cap;
   final hintText;
+  final initialValue;
 
   InputBox({
     @required this.text,
@@ -18,6 +19,7 @@ class InputBox extends StatelessWidget {
     this.maxLength,
     this.cap = TextCapitalization.none,
     this.hintText,
+    this.initialValue,
   });
 
   @override
@@ -34,6 +36,7 @@ class InputBox extends StatelessWidget {
         maxLines: maxLines,
         maxLength: maxLength,
         keyboardType: keyBoardType,
+        initialValue: initialValue,
         decoration: InputDecoration.collapsed(hintText: null).copyWith(
           contentPadding: EdgeInsets.all(big),
           labelText: text,

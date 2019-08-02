@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
-enum SingingCharacter { MALE, FEMALE }
+enum SingingCharacter { NONE, MALE, FEMALE, TRANSGENDER }
+//NONE is not rendered on screen. It is to keep sex unchecked initially.
 
 class SexCheckbox extends StatefulWidget {
   @override
@@ -9,7 +10,7 @@ class SexCheckbox extends StatefulWidget {
 }
 
 class _SexCheckboxState extends State<SexCheckbox> {
-  SingingCharacter _character = SingingCharacter.MALE;
+  SingingCharacter _character = SingingCharacter.NONE;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,12 @@ class _SexCheckboxState extends State<SexCheckbox> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
                   'Sex',
                   textAlign: TextAlign.left,
                   style: kHrisaText.copyWith(
-                    fontSize: 16.0,
+                    fontSize: 12.0,
                     letterSpacing: 3.0,
                     color: kLabelTextColor,
                   ),
@@ -65,6 +66,24 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   value: SingingCharacter.FEMALE,
+                  groupValue: _character,
+                  onChanged: (SingingCharacter value) {
+                    setState(() {
+                      _character = value;
+                    });
+                  },
+                ),
+              ),
+              ListTile(
+                title: Text(
+                  'Transgender',
+                  style: kHrisaText.copyWith(
+                    fontSize: 15.0,
+                    color: kTextFormFieldTextColor,
+                  ),
+                ),
+                leading: Radio(
+                  value: SingingCharacter.TRANSGENDER,
                   groupValue: _character,
                   onChanged: (SingingCharacter value) {
                     setState(() {

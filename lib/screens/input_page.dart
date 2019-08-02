@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/custom_widgets/sex_checkbox.dart';
+import 'package:hrisa/custom_widgets/calendar.dart';
+import 'package:hrisa/custom_widgets/age.dart';
 import 'package:hrisa/screens/consent_screen.dart';
 import 'package:hrisa/utilities/constants.dart';
 
@@ -42,16 +44,14 @@ class _InputPageState extends State<InputPage> {
                       ),
                     ),
                   ),
+                  //Image.asset('images/hri.jpg'),
                   InputBox(
                     text: 'Name',
                     cap: TextCapitalization.characters,
                     hintText: 'Enter Name',
                   ),
-                  InputBox(
-                    text: 'DOB',
-                    keyBoardType: TextInputType.datetime,
-                    hintText: 'DD/MM/YYYY',
-                  ),
+                  MyCalendar(ageOrDob: 'DOB'),
+                  //AgeBox(ageOrDob: 'AGE', ageText: '0',),
                   //TODO 1: Show Age (calculate it from DOB)
                   //InputBox(text: 'Sex'),
                   SexCheckbox(),
