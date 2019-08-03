@@ -1,3 +1,5 @@
 # HRISA
 
-A Flutter application.
+A Flutter application for screening.
+
+
