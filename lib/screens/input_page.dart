@@ -3,8 +3,6 @@ import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/custom_widgets/sex_checkbox.dart';
 import 'package:hrisa/custom_widgets/calendar.dart';
-import 'package:hrisa/custom_widgets/age.dart';
-import 'package:hrisa/screens/consent_screen.dart';
 import 'package:hrisa/utilities/constants.dart';
 
 class InputPage extends StatefulWidget {
@@ -14,7 +12,6 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   final _formKey = GlobalKey<FormState>();
-  UserConsent userConsent = UserConsent();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +37,7 @@ class _InputPageState extends State<InputPage> {
                         fontSize: 16.0,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 3.0,
-                        color: Color(0xFF3859C2),
+                        color: kHeadingColor,
                       ),
                     ),
                   ),
@@ -51,15 +48,13 @@ class _InputPageState extends State<InputPage> {
                     hintText: 'Enter Name',
                   ),
                   MyCalendar(ageOrDob: 'DOB'),
-                  //AgeBox(ageOrDob: 'AGE', ageText: '0',),
-                  //TODO 1: Show Age (calculate it from DOB)
-                  //InputBox(text: 'Sex'),
                   SexCheckbox(),
                   InputBox(
                     text: 'Address',
                     maxLines: 7,
                     big: 56.0,
                     hintText: 'Enter Address',
+                    cap: TextCapitalization.words,
                   ),
                   InputBox(
                     text: 'Phone',

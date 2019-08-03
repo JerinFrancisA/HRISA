@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
-enum SingingCharacter { NONE, MALE, FEMALE, TRANSGENDER }
+enum SingingCharacter { YES, NO }
 //NONE is not rendered on screen. It is to keep sex unchecked initially.
 
-class SexCheckbox extends StatefulWidget {
+class YesNoRadio extends StatefulWidget {
+  final text;
+  YesNoRadio({@required this.text});
+
   @override
-  _SexCheckboxState createState() => _SexCheckboxState();
+  _YesNoRadioState createState() => _YesNoRadioState(text: text);
 }
 
-class _SexCheckboxState extends State<SexCheckbox> {
-  SingingCharacter _character = SingingCharacter.NONE;
+class _YesNoRadioState extends State<YesNoRadio> {
+  SingingCharacter _character = SingingCharacter.NO;
+  final text;
+  _YesNoRadioState({@required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class _SexCheckboxState extends State<SexCheckbox> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(
-                  'Sex',
+                  text,
                   textAlign: TextAlign.left,
                   style: kHrisaText.copyWith(
                     fontSize: 12.0,
@@ -40,7 +45,7 @@ class _SexCheckboxState extends State<SexCheckbox> {
               ),
               ListTile(
                 title: Text(
-                  'Male',
+                  'Yes',
                   style: kHrisaText.copyWith(
                     fontSize: 15.0,
                     color: kTextFormFieldTextColor,
@@ -48,7 +53,7 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.MALE,
+                  value: SingingCharacter.YES,
                   groupValue: _character,
                   onChanged: (SingingCharacter value) {
                     setState(() {
@@ -59,7 +64,7 @@ class _SexCheckboxState extends State<SexCheckbox> {
               ),
               ListTile(
                 title: Text(
-                  'Female',
+                  'No',
                   style: kHrisaText.copyWith(
                     fontSize: 15.0,
                     color: kTextFormFieldTextColor,
@@ -67,26 +72,7 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.FEMALE,
-                  groupValue: _character,
-                  onChanged: (SingingCharacter value) {
-                    setState(() {
-                      _character = value;
-                    });
-                  },
-                ),
-              ),
-              ListTile(
-                title: Text(
-                  'Transgender',
-                  style: kHrisaText.copyWith(
-                    fontSize: 15.0,
-                    color: kTextFormFieldTextColor,
-                  ),
-                ),
-                leading: Radio(
-                  activeColor: kBottomButtonColor,
-                  value: SingingCharacter.TRANSGENDER,
+                  value: SingingCharacter.NO,
                   groupValue: _character,
                   onChanged: (SingingCharacter value) {
                     setState(() {

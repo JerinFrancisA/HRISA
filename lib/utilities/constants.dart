@@ -7,6 +7,7 @@ const kTextFormFieldTextColor = Color(0xCC1C0F53);
 const kLabelTextColor = Color(0x701123CE);
 const kHintTextColor = Color(0x301123CE);
 const kFieldBoxColor = Color(0x200159CD);
+const kHeadingColor = Color(0xFF3859C2);
 
 const kHrisaText = TextStyle(
   fontFamily: 'Comfortaa',
