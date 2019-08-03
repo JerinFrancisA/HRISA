@@ -26,7 +26,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Demgraphics',
+            'Demographics',
             style: kHrisaText,
           ),
         ),
