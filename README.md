@@ -1,3 +1,3 @@
-# Hrisa
+# HRISA
 
 A Flutter application.
