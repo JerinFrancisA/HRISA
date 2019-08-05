@@ -15,6 +15,7 @@ class BMI {
 }
 
 class Screening extends StatefulWidget {
+  static const routeName = 'Screening';
   @override
   _ScreeningState createState() => _ScreeningState();
 }
@@ -66,6 +67,21 @@ class _ScreeningState extends State<Screening> {
                   DisplayBox(
                     topText: 'BMI',
                     text: '0.0',
+                  ),
+                  InputBox(
+                    text: 'Heart Rate',
+                    keyBoardType: TextInputType.number,
+                    hintText: '(Optional) Enter Heart Rate',
+                  ),
+                  InputBox(
+                    text: 'Blood Pressure',
+                    keyBoardType: TextInputType.number,
+                    hintText: '(Optional) Enter Blood Pressure',
+                  ),
+                  InputBox(
+                    text: 'Oxygen Saturation',
+                    keyBoardType: TextInputType.number,
+                    hintText: '(Optional) Enter Oxygen Saturation',
                   ),
                   InputBox(
                     text: 'Cholestrol level',

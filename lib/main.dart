@@ -15,7 +15,7 @@ class Hrisa extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'HRISA',
-      initialRoute: '/',
+      initialRoute: InputPage.routeName,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: kScaffoldBackgroundColor,
         appBarTheme: AppBarTheme(
@@ -23,12 +23,12 @@ class Hrisa extends StatelessWidget {
         ),
       ),
       routes: {
-        '/': (context) => InputPage(),
-        'UserConsent': (context) => UserConsent(),
-        'Screening': (context) => Screening(),
-        'MedicalHistory': (context) => MedicalHistory(),
-        'RiskScore': (context) => RiskScore(),
-        'Recommendation': (context) => Recommendation(),
+        InputPage.routeName: (context) => InputPage(),
+        UserConsent.routeName: (context) => UserConsent(),
+        Screening.routeName: (context) => Screening(),
+        MedicalHistory.routeName: (context) => MedicalHistory(),
+        RiskScore.routeName: (context) => RiskScore(),
+        Recommendation.routeName: (context) => Recommendation(),
       },
     );
   }

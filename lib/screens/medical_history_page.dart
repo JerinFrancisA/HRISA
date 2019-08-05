@@ -7,6 +7,7 @@ import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/utilities/constants.dart';
 
 class MedicalHistory extends StatefulWidget {
+  static const routeName = 'MedicalHistory';
   @override
   _MedicalHistoryState createState() => _MedicalHistoryState();
 }
@@ -49,7 +50,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                     ),
                   ),
                   YesNoRadio(text: 'Diabetes Mellitius'),
-                  YesNoRadio(text: 'Hyper Tension'),
+                  YesNoRadio(text: 'Hypertension'),
                   YesNoRadio(text: 'Smoker'),
                   DisplayBox(topText: 'Other', text: 'Select other diseases'),
                   // TODO 4: Implement drop down

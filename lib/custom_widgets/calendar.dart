@@ -25,6 +25,7 @@ class FindAge {
             ? pAge -= 1
             : (DateTime.now().day - day < 0) ? pAge -= 1 : pAge += 0
         : pAge += 0;
+    if(pAge <0) {pAge = 0;}
     print('in function $pAge');
   }
 }
@@ -54,8 +55,11 @@ class _MyCalendarState extends State<MyCalendar> {
       lastDate: DateTime(2020),
       builder: (BuildContext context, Widget child) {
         return Theme(
-          data: ThemeData.dark(),
-          //TODO 2: Customize calendar
+          data: ThemeData.light().copyWith(
+            accentColor: kBottomButtonColor,
+            primaryColor: kHeadingColor,
+            backgroundColor: kAppBarColor,
+          ),
           child: child,
         );
       },

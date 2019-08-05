@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "1023376940929",
-    "firebase_url": "https://hrisa-c7777.firebaseio.com",
-    "project_id": "hrisa-c7777",
-    "storage_bucket": "hrisa-c7777.appspot.com"
+    "project_number": "740217234862",
+    "firebase_url": "https://hrisa-ceae6.firebaseio.com",
+    "project_id": "hrisa-ceae6",
+    "storage_bucket": "hrisa-ceae6.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1023376940929:android:d3176588b28bf9d7",
+        "mobilesdk_app_id": "1:740217234862:android:d3176588b28bf9d7",
         "android_client_info": {
           "package_name": "com.hrisa.jafaa"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1023376940929-880q53jubu17kv5kbhviprttho43q35i.apps.googleusercontent.com",
+          "client_id": "740217234862-o8emcfdequin20nhlq8qb385dmjcf2mc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCP-itlDy49xrRDbYHOwn6xbS3zlrjZopc"
+          "current_key": "AIzaSyDBn5hejDrBM-VKRls_hVWZnbeNO44sLf0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1023376940929-880q53jubu17kv5kbhviprttho43q35i.apps.googleusercontent.com",
+              "client_id": "740217234862-o8emcfdequin20nhlq8qb385dmjcf2mc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

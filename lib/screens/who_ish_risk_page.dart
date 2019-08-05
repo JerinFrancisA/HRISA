@@ -3,6 +3,7 @@ import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
 
 class RiskScore extends StatefulWidget {
+  static const routeName = 'RiskScore';
   @override
   _RiskScoreState createState() => _RiskScoreState();
 }

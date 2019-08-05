@@ -6,6 +6,7 @@ import 'package:hrisa/custom_widgets/calendar.dart';
 import 'package:hrisa/utilities/constants.dart';
 
 class InputPage extends StatefulWidget {
+  static const routeName = 'InputPage';
   @override
   _InputPageState createState() => _InputPageState();
 }

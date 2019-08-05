@@ -10,6 +10,7 @@ class InputBox extends StatelessWidget {
   final cap;
   final hintText;
   final initialValue;
+  var input;
 
   InputBox({
     @required this.text,
@@ -28,6 +29,10 @@ class InputBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        onFieldSubmitted: (val) {
+          input = val;
+          print(input);
+        },
         textCapitalization: cap,
         style: kHrisaText.copyWith(
           fontSize: 20.0,

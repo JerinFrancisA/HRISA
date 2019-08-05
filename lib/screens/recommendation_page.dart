@@ -4,6 +4,7 @@ import 'package:hrisa/utilities/constants.dart';
 import 'package:hrisa/utilities/advices.dart';
 
 class Recommendation extends StatefulWidget {
+  static const routeName = 'Recommendation';
   @override
   _RecommendationState createState() => _RecommendationState();
 }

@@ -4,6 +4,7 @@ import 'package:hrisa/utilities/constants.dart';
 import 'package:hrisa/screens/screening_screen.dart';
 
 class UserConsent extends StatefulWidget {
+  static const routeName = 'UserConsent';
   @override
   _UserConsentState createState() => _UserConsentState();
 }
