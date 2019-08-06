@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/virander_flutter.iml" filepath="$PROJECT_DIR$/.idea/virander_flutter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/firephoneauth.iml" filepath="$PROJECT_DIR$/firephoneauth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/firephoneauth_android.iml" filepath="$PROJECT_DIR$/firephoneauth_android.iml" />
     </modules>
   </component>
 </project>
