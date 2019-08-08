@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hrisa/screens/login_page.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/screens/consent_screen.dart';
 import 'package:hrisa/screens/screening_screen.dart';
@@ -15,7 +16,7 @@ class Hrisa extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'HRISA',
-      initialRoute: InputPage.routeName,
+      initialRoute: LoginPage.routeName,
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: kScaffoldBackgroundColor,
         appBarTheme: AppBarTheme(
@@ -23,6 +24,7 @@ class Hrisa extends StatelessWidget {
         ),
       ),
       routes: {
+        LoginPage.routeName: (context) => LoginPage(),
         InputPage.routeName: (context) => InputPage(),
         UserConsent.routeName: (context) => UserConsent(),
         Screening.routeName: (context) => Screening(),

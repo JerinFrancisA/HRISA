@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
-enum SingingCharacter { NONE, MALE, FEMALE, TRANSGENDER }
+enum Sex { NONE, MALE, FEMALE, TRANSGENDER }
 //NONE is not rendered on screen. It is to keep sex unchecked initially.
 
 class SexCheckbox extends StatefulWidget {
+  var input;
+
   @override
   _SexCheckboxState createState() => _SexCheckboxState();
 }
 
 class _SexCheckboxState extends State<SexCheckbox> {
-  SingingCharacter _character = SingingCharacter.NONE;
+  Sex _character = Sex.NONE;
+
+  void setInputValue(x) {
+    x == Sex.MALE
+        ? widget.input= 'Male'
+        : x == Sex.FEMALE ? widget.input = 'Female' : widget.input = 'Transgender';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +56,12 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.MALE,
+                  value: Sex.MALE,
                   groupValue: _character,
-                  onChanged: (SingingCharacter value) {
+                  onChanged: (Sex value) {
                     setState(() {
                       _character = value;
+                      setInputValue(_character);
                     });
                   },
                 ),
@@ -67,11 +76,12 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.FEMALE,
+                  value: Sex.FEMALE,
                   groupValue: _character,
-                  onChanged: (SingingCharacter value) {
+                  onChanged: (Sex value) {
                     setState(() {
                       _character = value;
+                      setInputValue(_character);
                     });
                   },
                 ),
@@ -86,11 +96,12 @@ class _SexCheckboxState extends State<SexCheckbox> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.TRANSGENDER,
+                  value: Sex.TRANSGENDER,
                   groupValue: _character,
-                  onChanged: (SingingCharacter value) {
+                  onChanged: (Sex value) {
                     setState(() {
                       _character = value;
+                      setInputValue(_character);
                     });
                   },
                 ),

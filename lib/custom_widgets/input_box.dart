@@ -8,8 +8,10 @@ class InputBox extends StatelessWidget {
   final big;
   final maxLength;
   final cap;
+  final obscureText;
   final hintText;
   final initialValue;
+  final Function validator;
   var input;
 
   InputBox({
@@ -21,6 +23,8 @@ class InputBox extends StatelessWidget {
     this.cap = TextCapitalization.none,
     this.hintText,
     this.initialValue,
+    this.obscureText = false,
+    this.validator,
   });
 
   @override
@@ -29,9 +33,8 @@ class InputBox extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
-        onFieldSubmitted: (val) {
+        onSaved: (val) {
           input = val;
-          print(input);
         },
         textCapitalization: cap,
         style: kHrisaText.copyWith(
@@ -42,6 +45,7 @@ class InputBox extends StatelessWidget {
         maxLength: maxLength,
         keyboardType: keyBoardType,
         initialValue: initialValue,
+        obscureText: obscureText,
         decoration: InputDecoration.collapsed(hintText: null).copyWith(
           contentPadding: EdgeInsets.all(big),
           labelText: text,
@@ -56,6 +60,11 @@ class InputBox extends StatelessWidget {
             letterSpacing: 3.0,
             color: kHintTextColor,
           ),
+          errorStyle: kHrisaText.copyWith(
+            fontSize: 10.0,
+            letterSpacing: 2.0,
+            color: kBottomButtonColor.withOpacity(0.8),
+          ),
           filled: true,
           fillColor: kFieldBoxColor,
           border: OutlineInputBorder(
@@ -63,11 +72,7 @@ class InputBox extends StatelessWidget {
             borderSide: BorderSide.none,
           ),
         ),
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-        },
+        validator: validator??((val) => val.isEmpty ? '$text is required' : null),
       ),
     );
   }

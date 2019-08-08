@@ -5,6 +5,7 @@ import 'package:hrisa/screens/screening_screen.dart';
 
 class UserConsent extends StatefulWidget {
   static const routeName = 'UserConsent';
+
   @override
   _UserConsentState createState() => _UserConsentState();
 }
@@ -28,7 +29,12 @@ class _UserConsentState extends State<UserConsent> {
                 'Consent Screen',
                 style: kHrisaText,
               ),
-              BottomButton(text: 'START SCREENING', route: 'Screening'),
+              BottomButton(
+                text: 'START SCREENING',
+                onPressed: () {
+                  Navigator.pushNamed(context, Screening.routeName);
+                },
+              ),
             ],
           ),
         ),

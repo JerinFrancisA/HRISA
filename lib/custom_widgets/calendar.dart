@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/custom_widgets/date_of_birth.dart';
 import 'package:hrisa/custom_widgets/age.dart';
+import 'package:hrisa/custom_widgets/sub_heading_text.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:intl/intl.dart';
 
-String selectedValue;
+var hrisaDob = DateTime.now().toString();
+var hrisaAge = 0;
 
 class FindAge {
   String toFindAge;
@@ -25,8 +27,9 @@ class FindAge {
             ? pAge -= 1
             : (DateTime.now().day - day < 0) ? pAge -= 1 : pAge += 0
         : pAge += 0;
-    if(pAge <0) {pAge = 0;}
-    print('in function $pAge');
+    if (pAge < 0) {
+      pAge = 0;
+    }
   }
 }
 
@@ -52,7 +55,7 @@ class _MyCalendarState extends State<MyCalendar> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1920),
-      lastDate: DateTime(2020),
+      lastDate: DateTime.now(),
       builder: (BuildContext context, Widget child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -66,7 +69,9 @@ class _MyCalendarState extends State<MyCalendar> {
     );
     setState(() {
       findThroughCall.findAge(selected);
-      print('from setDate ${findThroughCall.pAge}');
+      hrisaDob = DateFormat('dd/MM/yyyy').format(selected);
+      hrisaAge = findThroughCall.pAge;
+      print('\'$hrisaAge\'\n\'$hrisaDob\'');
     });
     //selectedValue = DateFormat('dd/MM/yyyy').format(selected);
   }
@@ -85,7 +90,7 @@ class _MyCalendarState extends State<MyCalendar> {
 
     return Column(
       children: <Widget>[
-        dob,
+        SubHeadingText(text: 'Select DOB from Calendar'),
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: RaisedButton(
@@ -106,6 +111,7 @@ class _MyCalendarState extends State<MyCalendar> {
             ),
           ),
         ),
+        dob,
         MyAge(
           ageOrDob: 'AGE',
           ageText: findThroughCall.pAge.toString(),

@@ -3,9 +3,9 @@ import 'package:hrisa/utilities/constants.dart';
 
 class BottomButton extends StatelessWidget {
   final text;
-  final route;
+  final Function onPressed;
 
-  BottomButton({@required this.text, @required this.route});
+  BottomButton({@required this.text, @required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +13,7 @@ class BottomButton extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: RawMaterialButton(
         elevation: 8.0,
-        onPressed: () {
-          Navigator.pushNamed(context, route);
-        },
+        onPressed: onPressed,
         child: Text(
           text,
           style: kHrisaText.copyWith(

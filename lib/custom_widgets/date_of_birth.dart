@@ -43,7 +43,7 @@ class MyDate extends StatelessWidget {
               ),
               SizedBox(height: 10.0),
               Text(
-                'Change Below',
+                'Select from Calendar',
                 style: kHrisaText.copyWith(
                   fontSize: 12.0,
                   letterSpacing: 3.0,

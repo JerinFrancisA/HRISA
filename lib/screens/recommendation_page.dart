@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:hrisa/utilities/advices.dart';
 
 class Recommendation extends StatefulWidget {
   static const routeName = 'Recommendation';
+
   @override
   _RecommendationState createState() => _RecommendationState();
 }
@@ -40,9 +42,21 @@ class _RecommendationState extends State<Recommendation> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 30.0),
-              BottomButton(text: 'Finish', route: null),
-              BottomButton(text: 'Print PDF', route: null),
-              BottomButton(text: 'Screen Next', route: '/'),
+              BottomButton(
+                text: 'Finish',
+                onPressed: () {},
+              ),
+              BottomButton(
+                text: 'Print PDF',
+                onPressed: () {},
+              ),
+              BottomButton(
+                text: 'Screen Next',
+                onPressed: () {
+                  Navigator.popUntil(
+                      context, ModalRoute.withName(InputPage.routeName));
+                },
+              ),
             ],
           ),
         ),

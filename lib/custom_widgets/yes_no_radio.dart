@@ -1,21 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
-enum SingingCharacter { YES, NO }
-//NONE is not rendered on screen. It is to keep sex unchecked initially.
+enum Option { YES, NO }
 
 class YesNoRadio extends StatefulWidget {
+  final bool drugRadio;
   final text;
-  YesNoRadio({@required this.text});
+  bool hrisaOption;
+
+  YesNoRadio({@required this.text, @required this.drugRadio});
 
   @override
   _YesNoRadioState createState() => _YesNoRadioState(text: text);
 }
 
 class _YesNoRadioState extends State<YesNoRadio> {
-  SingingCharacter _character = SingingCharacter.NO;
+  Option _character = Option.NO;
   final text;
+
   _YesNoRadioState({@required this.text});
+
+  void setInputValue(x) {
+    x == Option.YES ? widget.hrisaOption = true : widget.hrisaOption = false;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,11 +60,12 @@ class _YesNoRadioState extends State<YesNoRadio> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.YES,
+                  value: Option.YES,
                   groupValue: _character,
-                  onChanged: (SingingCharacter value) {
+                  onChanged: (Option value) {
                     setState(() {
                       _character = value;
+                      setInputValue(Option.YES);
                     });
                   },
                 ),
@@ -72,14 +80,35 @@ class _YesNoRadioState extends State<YesNoRadio> {
                 ),
                 leading: Radio(
                   activeColor: kBottomButtonColor,
-                  value: SingingCharacter.NO,
+                  value: Option.NO,
                   groupValue: _character,
-                  onChanged: (SingingCharacter value) {
+                  onChanged: (Option value) {
                     setState(() {
                       _character = value;
+                      setInputValue(Option.NO);
                     });
                   },
                 ),
+              ),
+              SizedBox(
+                height: 18.0,
+              ),
+              Visibility(
+                visible: (widget.hrisaOption ?? false) &&
+                    (widget.drugRadio ?? false),
+                child: Container(
+                  child: Text(
+                    'Click to select drugs taken',
+                    textAlign: TextAlign.center,
+                    style: kHrisaText.copyWith(
+                      fontSize: 15.0,
+                      color: kBottomButtonColor.withOpacity(0.85),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10.0,
               ),
             ],
           ),

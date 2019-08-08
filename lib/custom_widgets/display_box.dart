@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
 class DisplayBox extends StatelessWidget {
-
   final topText;
   final text;
-  DisplayBox({@required this.topText, @required this.text});
+  Function onTap = () {};
+
+  DisplayBox({@required this.topText, @required this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,17 @@ class DisplayBox extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 22.0),
+              GestureDetector(
+                onTap: onTap,
+                child: Text(
+                  'Update BMI',
+                  style: kHrisaText.copyWith(
+                    fontSize: 15.0,
+                    color: kBottomButtonColor.withOpacity(0.85),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10.0),
             ],
           ),
         ),
