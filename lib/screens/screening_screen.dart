@@ -32,7 +32,7 @@ class _ScreeningState extends State<Screening> {
   var hrisaBloodPressure = InputBox(
     text: 'Blood Pressure',
     keyBoardType: TextInputType.number,
-    hintText: '(Optional) Enter Blood Pressure',
+    hintText: 'Enter Blood Pressure',
   );
   var hrisaHeartRate = InputBox(
     text: 'Heart Rate',

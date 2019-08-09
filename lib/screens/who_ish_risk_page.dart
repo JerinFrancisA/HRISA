@@ -101,7 +101,7 @@ class _RiskScoreState extends State<RiskScore> {
               Text(
                 hrisaRisk,
                 style: kHrisaText.copyWith(
-                  fontSize: 90.0,
+                  fontSize: 45.0,
                   fontWeight: FontWeight.w800,
                   letterSpacing: 3.0,
                 ),
