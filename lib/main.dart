@@ -7,6 +7,7 @@ import 'package:hrisa/screens/medical_history_page.dart';
 import 'package:hrisa/screens/who_ish_risk_page.dart';
 import 'package:hrisa/screens/recommendation_page.dart';
 import 'package:hrisa/utilities/constants.dart';
+import 'package:hrisa/screens/consent_screen_two.dart';
 
 void main() => runApp(Hrisa());
 
@@ -27,6 +28,7 @@ class Hrisa extends StatelessWidget {
         LoginPage.routeName: (context) => LoginPage(),
         InputPage.routeName: (context) => InputPage(),
         UserConsent.routeName: (context) => UserConsent(),
+        CompleteConsent.routeName: (context) => CompleteConsent(),
         Screening.routeName: (context) => Screening(),
         MedicalHistory.routeName: (context) => MedicalHistory(),
         RiskScore.routeName: (context) => RiskScore(),

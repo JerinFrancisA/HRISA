@@ -8,12 +8,73 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:740217234862:android:7567f6a7ee585d9c",
+        "android_client_info": {
+          "package_name": "com.example.firephoneauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740217234862-4recang99dae7ugpqpi17iv9vnors5cc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firephoneauth",
+            "certificate_hash": "d5ec6b3582ba21c77917bb99987e5fb69ca0119d"
+          }
+        },
+        {
+          "client_id": "740217234862-1rgtiqsmr6cp22eomspjkcbc3tbjpmpi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firephoneauth",
+            "certificate_hash": "f21772ebbb12be5612b9214e088a4062cfc8b370"
+          }
+        },
+        {
+          "client_id": "740217234862-o8emcfdequin20nhlq8qb385dmjcf2mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBn5hejDrBM-VKRls_hVWZnbeNO44sLf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740217234862-o8emcfdequin20nhlq8qb385dmjcf2mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:740217234862:android:d3176588b28bf9d7",
         "android_client_info": {
           "package_name": "com.hrisa.jafaa"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "740217234862-0pkuoir5mmhlnaobrhbpd0laavsk6q8u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hrisa.jafaa",
+            "certificate_hash": "d5ec6b3582ba21c77917bb99987e5fb69ca0119d"
+          }
+        },
+        {
+          "client_id": "740217234862-kv8aanf3v0i5rb27kd3o46n2585cmsv9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hrisa.jafaa",
+            "certificate_hash": "f21772ebbb12be5612b9214e088a4062cfc8b370"
+          }
+        },
         {
           "client_id": "740217234862-o8emcfdequin20nhlq8qb385dmjcf2mc.apps.googleusercontent.com",
           "client_type": 3

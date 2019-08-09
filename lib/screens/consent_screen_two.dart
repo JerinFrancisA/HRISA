@@ -1,11 +1,11 @@
-
-
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hrisa/custom_widgets/bottom_button.dart';
+import 'package:hrisa/screens/screening_screen.dart';
+import 'package:hrisa/utilities/constants.dart';
 
 class CompleteConsent extends StatefulWidget {
-  static const routeName = 'CompleteConsent';
+  static const routeName = 'ConsentGiven';
   @override
   _CompleteConsentState createState() => _CompleteConsentState();
 }
@@ -30,29 +30,29 @@ class _CompleteConsentState extends State<CompleteConsent> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Dashboard'),
-          centerTitle: true,
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Consent Given',
+            style: kHrisaText,
+          ),
         ),
         body: Center(
           child: Container(
-            child: new Column(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text('OTP verified'),
+                Text('OTP verified', style: kHrisaText),
                 SizedBox(
                   height: 15.0,
                 ),
-                new OutlineButton(
-                  borderSide: BorderSide(
-                      color: Colors.red, style: BorderStyle.solid, width: 3.0),
-                  child: Text('PROCEED'),
+                BottomButton(
+                  text:'PROCEED',
                   onPressed: () {
                     FirebaseAuth.instance.signOut().then((action) {
                       Navigator
                           .of(context)
-                          .pushReplacementNamed('/landingpage');
+                          .pushReplacementNamed(Screening.routeName);
                     }).catchError((e) {
                       print(e);
                     });
