@@ -75,4 +75,7 @@ class Hrisa {
   String hrisaHypertensionDrugString = '';
   var hrisaSmoker;
   String hrisaOtherConditionsString = '';
+
+  //from risk page
+  String hrisaRisk='<10%';
 }

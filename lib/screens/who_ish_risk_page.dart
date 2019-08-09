@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hrisa/screens/recommendation_page.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
-
+import 'package:hrisa/screens/input_page.dart';
+import 'package:hrisa/utilities/risk_value.dart';
 class RiskScore extends StatefulWidget {
   static const routeName = 'RiskScore';
 
@@ -11,6 +12,69 @@ class RiskScore extends StatefulWidget {
 }
 
 class _RiskScoreState extends State<RiskScore> {
+  String refv;
+  String hrisaRisk;
+  String setAge() {
+    return hrisaValues.hrisaAge.toString().substring(0,1)+'0';
+  }
+  String setSex() {
+    if(hrisaValues.hrisaSex=='Male'||hrisaValues.hrisaSex=='Transgender')
+      return '1';
+    else
+      return '0';
+  }
+  String setDiabetes() {
+    if(hrisaValues.hrisaDiabetesMellitius==true)
+      return '1';
+    else
+      return '0';
+  }
+  String setSmk() {
+    if(hrisaValues.hrisaSmoker==true)
+      return '1';
+    else
+      return '0';
+  }
+  String setSbp() {
+    double bp = double.parse(hrisaValues.hrisaBloodPressure);
+    if(bp>0 && bp<140)
+      return '120';
+    else if(bp>=140&&bp<160)
+      return '140';
+    else if(bp>=160 && bp<180)
+      return '160';
+    else
+      return '180';
+  }
+
+  String setCholestrol() {
+    if(hrisaValues.hrisaCholestrolLevel=="")
+      return '0';
+    double chl = double.parse(hrisaValues.hrisaCholestrolLevel);
+    if(chl>0 && chl<4.5)
+      return '4';
+    else if(chl>=4.5&&chl<5.5)
+      return '5';
+    else if(chl>=5.5 && chl<6.5)
+      return '6';
+    else if(chl>=6.5&&chl<7.5)
+      return '7';
+    else
+      return '8';
+  }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    if(hrisaValues.hrisaAge<40)
+      {
+        hrisaRisk='<10%';
+        return ;
+      }
+    refv = setAge() + setSex() + setDiabetes() + setSmk() + setSbp() + setCholestrol();
+    hrisaRisk=hrisaRiskValues[int.parse(refv)];
+
+  }
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +99,7 @@ class _RiskScoreState extends State<RiskScore> {
               ),
               SizedBox(height: 80.0),
               Text(
-                '40%',
+                hrisaRisk,
                 style: kHrisaText.copyWith(
                   fontSize: 90.0,
                   fontWeight: FontWeight.w800,
@@ -46,6 +110,7 @@ class _RiskScoreState extends State<RiskScore> {
               BottomButton(
                 text: 'Recommendation',
                 onPressed: () {
+                  hrisaValues.hrisaRisk = hrisaRisk;
                   Navigator.pushNamed(context, Recommendation.routeName);
                 },
               ),

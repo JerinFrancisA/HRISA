@@ -12,6 +12,7 @@ class Recommendation extends StatefulWidget {
 }
 
 class _RecommendationState extends State<Recommendation> {
+  String hrisaRecomendation = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,7 +38,7 @@ class _RecommendationState extends State<Recommendation> {
               ),
               SizedBox(height: 30.0),
               Text(
-                advices[0],
+                advices[hrisaValues.hrisaRisk],
                 style: kHrisaText,
                 textAlign: TextAlign.center,
               ),

@@ -1,9 +1,11 @@
-List<String> advices = [
+Map<String,String> advices = {
 
-  '1. Seek medical advice\n2. Follow up with Physician regularly\n3. Continue medication (if taking any)\n4. Practice Healthy Diet, Life style & Exercise regularly',
+  '>=40%': '1. Seek medical advice\n2. Follow up with Physician regularly\n3. Continue medication (if taking any)\n4. Practice Healthy Diet, Life style & Exercise regularly',
+  '30% to <40%': '1. Seek medical advice\n2. Follow up with Physician regularly\n3. Continue medication (if taking any)\n4. Practice Healthy Diet, Life style & Exercise regularly',
 
-  '1. Follow up with Physician regularly\n2. Continue medication (if taking any)',
+  '20% to <30%': '1. Follow up with Physician regularly\n2. Continue medication (if taking any)',
 
-  '1. Practice Healthy Diet, Life style & Exercise regularly'
+  '10% to <20%': '1. Practice Healthy Diet, Life style & Exercise regularly',
+  '<10%':'1. Practice Healthy Diet, Life style & Exercise regularly',
 
-];
+};
