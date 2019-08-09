@@ -39,6 +39,76 @@ class _InputPageState extends State<InputPage> {
   void _submitForm() {
     final FormState form = _formKey.currentState;
     form.save(); //This invokes each onSaved event
+    if(hrisaSex.input.toString() == 'Sex.NONE') {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: kScaffoldBackgroundColor,
+            title: Text(
+              'Sex cannot be Empty',
+              textAlign: TextAlign.center,
+              style: kHrisaText.copyWith(
+                color: kTextFormFieldTextColor,
+              ),
+            ),
+            actions: <Widget>[
+              RawMaterialButton(
+                child: Text(
+                  'DISMISS',
+                  style: kHrisaText.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                fillColor: kBottomButtonColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+    if(hrisaAge.toString() == '0') {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: kScaffoldBackgroundColor,
+            title: Text(
+              'Age cannot be Empty',
+              textAlign: TextAlign.center,
+              style: kHrisaText.copyWith(
+                color: kTextFormFieldTextColor,
+              ),
+            ),
+            actions: <Widget>[
+              RawMaterialButton(
+                child: Text(
+                  'DISMISS',
+                  style: kHrisaText.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                fillColor: kBottomButtonColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0),
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 
   @override

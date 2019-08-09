@@ -1,3 +1,5 @@
+enum Sex { MALE, FEMALE, TRANSGENDER, NONE }
+
 class Hrisa {
 
   void printHrisaValues1 () {
@@ -6,7 +8,6 @@ class Hrisa {
     print(hrisaAge);
     print(hrisaSex);
     print(hrisaAddress);
-    print(hrisaPhoneNumber);
   }
   void printHrisaValues2 () {
     print('\n\n\n');
@@ -53,7 +54,7 @@ class Hrisa {
   String hrisaName;
   String hrisaDob;
   int hrisaAge;
-  String hrisaSex;
+  String hrisaSex = Sex.NONE.toString();
   String hrisaAddress;
   String hrisaPhoneNumber;
 

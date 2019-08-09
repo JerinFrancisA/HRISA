@@ -47,6 +47,7 @@ class _MyCalendarState extends State<MyCalendar> {
   var dob;
   final ageOrDob;
   FindAge findThroughCall = FindAge();
+  final _formKey = GlobalKey<FormState>();
 
   _MyCalendarState({@required this.ageOrDob});
 
@@ -88,35 +89,51 @@ class _MyCalendarState extends State<MyCalendar> {
             ageOrDob: ageOrDob,
           );
 
-    return Column(
-      children: <Widget>[
-        SubHeadingText(text: 'Select DOB from Calendar'),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 8.0),
-          child: RaisedButton(
-            padding: EdgeInsets.all(15.0),
-            splashColor: kLabelTextColor,
-            highlightColor: kTextFormFieldTextColor,
-            onPressed: () {
-              _showDateTimePicker();
-            },
-            elevation: 5.0,
-            child: Opacity(
-              opacity: 0.6,
-              child: Icon(
-                Icons.calendar_today,
-                color: kTextFormFieldTextColor,
-                size: 40.0,
+    return FormField(
+      autovalidate: true,
+      key: _formKey,
+      validator: (val) =>
+          (hrisaAge.toString() == '0' ? 'Can\'t be empty' : null),
+      builder: (context) => Column(
+            children: <Widget>[
+              SubHeadingText(text: 'Select DOB from Calendar'),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: RaisedButton(
+                  padding: EdgeInsets.all(15.0),
+                  splashColor: kLabelTextColor,
+                  highlightColor: kTextFormFieldTextColor,
+                  onPressed: () {
+                    _showDateTimePicker();
+                  },
+                  elevation: 5.0,
+                  child: Opacity(
+                    opacity: 0.6,
+                    child: Icon(
+                      Icons.calendar_today,
+                      color: kTextFormFieldTextColor,
+                      size: 40.0,
+                    ),
+                  ),
+                ),
               ),
-            ),
+              GestureDetector(
+                child: dob,
+                onTap: () {
+                  _showDateTimePicker();
+                },
+              ),
+              GestureDetector(
+                onTap: () {
+                  _showDateTimePicker();
+                },
+                child: MyAge(
+                  ageOrDob: 'AGE',
+                  ageText: findThroughCall.pAge.toString(),
+                ),
+              ),
+            ],
           ),
-        ),
-        dob,
-        MyAge(
-          ageOrDob: 'AGE',
-          ageText: findThroughCall.pAge.toString(),
-        ),
-      ],
     );
   }
 }
