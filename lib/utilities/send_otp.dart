@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:hrisa/utilities/twilio.dart';
 import 'package:hrisa/screens/input_page.dart';
 
@@ -9,13 +10,15 @@ Twilio twilio = new Twilio(key, authToken, version);
 
 var from = '+19384440586';
 var to = hrisaValues.hrisaPhoneNumber;
-var body = ' Greetings from HeartRescue India. Your Cardiovascular disease risk score is ${hrisaValues.hrisaRisk} and we recommend: \n ${hrisaValues.hrisaRecommendation}.\n In case of chest pain or symptoms of heart attack, call the HeartRescue Toll Freenumber 1800-123-1133';
+var min = 100000;
+var max = 999999;
+var otp = (min + Random().nextInt(max - min)).toString();
 
 //twilio.sendSMS(from, to, body).then((response) => print("Your message has been sent!")).catchError(print);
 
-Future<void> sendSMS() async {
+Future<void> sendOTP() async {
   try {
-    await twilio.sendSMS(from, to, body);
+    await twilio.sendSMS(from, to, otp);
     print('Success !');
   } catch (e) {
     print(e);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/screens/screening_screen.dart';
 import 'package:hrisa/utilities/constants.dart';
+import 'package:hrisa/utilities/send_otp.dart';
 
 class CompleteConsent extends StatefulWidget {
   static const routeName = 'ConsentGiven';
@@ -17,18 +17,18 @@ class _CompleteConsentState extends State<CompleteConsent> {
   getUid() {}
 
   @override
-  void initState() {
-    this.uid = '';
-    FirebaseAuth.instance.currentUser().then((val) {
-      setState(() {
-        print(val.uid);
-        this.uid = val.uid;
-      });
-    }).catchError((e) {
-      print(e);
-    });
-    super.initState();
-  }
+//  void initState() {
+//    this.uid = '';
+//    FirebaseAuth.instance.currentUser().then((val) {
+//      setState(() {
+//        print(val.uid);
+//        this.uid = val.uid;
+//      });
+//    }).catchError((e) {
+//      print(e);
+//    });
+//    super.initState();
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +50,10 @@ class _CompleteConsentState extends State<CompleteConsent> {
               ),
               BottomButton(
                 text: 'PROCEED',
-                onPressed: () async {
-                  await FirebaseAuth.instance.signOut().then((action) {
-                    Navigator.of(context)
-                        .pushReplacementNamed(Screening.routeName);
-                  }).catchError((e) {
-                    print(e);
-                  });
+                onPressed: () {
+                  otp = '';
+                  Navigator.of(context)
+                      .pushReplacementNamed(Screening.routeName);
                 },
               ),
             ],
