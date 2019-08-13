@@ -50,6 +50,32 @@ class Hrisa {
     print(hrisaOtherConditionsString);
   }
 
+  void printHrisaValues4 () {
+    print('\n\n\n');
+    print(hrisaName);
+    print(hrisaDob);
+    print(hrisaAge);
+    print(hrisaSex);
+    print(hrisaAddress);
+    print(hrisaPhoneNumber);
+    print(hrisaHeight);
+    print(hrisaWeight);
+    print(hrisaBmi);
+    print(hrisaHeartRate);
+    print(hrisaBloodPressure);
+    print(hrisaOxygenSaturation);
+    print(hrisaCholestrolLevel);
+    print(hrisaWaistHipRatio);
+    print(hrisaDiabetesMellitius);
+    print(hrisaDiabetesMellitiusDrugString);
+    print(hrisaHypertension);
+    print(hrisaHypertensionDrugString);
+    print(hrisaSmoker);
+    print(hrisaOtherConditionsString);
+    print(hrisaRisk);
+    print(hrisaRecommendation);
+  }
+
   //from input_page
   String hrisaName;
   String hrisaDob;
@@ -76,6 +102,9 @@ class Hrisa {
   var hrisaSmoker;
   String hrisaOtherConditionsString = '';
 
-  //from risk page
-  String hrisaRisk='<10%';
+  //from risk_page
+  String hrisaRisk = '<10%';
+
+  //from recommendation_page
+  String hrisaRecommendation = '';
 }

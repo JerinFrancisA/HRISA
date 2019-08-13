@@ -48,12 +48,12 @@ class _MedicalHistoryState extends State<MedicalHistory> {
   List<bool> hrisaOtherConditionExist = List.filled(8, false, growable: true);
   String hrisaOtherConditionString = '';
   List<String> hrisaOtherConditionNames = [
-    'Chronic Heart Disease',
     'Ischemic Heart Disease',
     'Stroke',
     'Heart failure',
-    'Asthma',
     'Seizures',
+    'Asthma',
+    'Chronic Kidney Disease',
     'Thyroid Disease',
     'COPD',
   ];
@@ -237,16 +237,22 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                           hrisaDiabetesMellitius.hrisaOption ?? false;
                       hrisaDiabetesMellitiusDrugString =
                           ''; // if user comes back to change something the drug list is appended to previous drug list so initializing it back to '' (empty string)
+                      int j = 0;
                       for (int i = 0; i < 6; i++) {
                         if (hrisaDiabetesDrug[i] == true &&
                             (hrisaDiabetesMellitius.hrisaOption ?? false)) {
-                          hrisaDiabetesMellitiusDrugString +=
-                              hrisaDiabetesDrugNames[i] + ', ';
+                          hrisaDiabetesMellitiusDrugString += ' ' +
+                              (j + 1).toString() +
+                              '. ' +
+                              hrisaDiabetesDrugNames[i];
+                          j += 1;
                         }
                       }
                       if (hrisaOtherDiabetesDrugs.input != null &&
                           (hrisaDiabetesMellitius.hrisaOption ?? false)) {
-                        hrisaDiabetesMellitiusDrugString +=
+                        hrisaDiabetesMellitiusDrugString += ' ' +
+                            (j + 1).toString() +
+                            '. ' +
                             hrisaOtherDiabetesDrugs.input;
                         hrisaOtherDiabetesDrugs.input = '';
                       }
@@ -258,16 +264,22 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                           hrisaHypertension.hrisaOption ?? false;
                       hrisaHypertensionDrugString =
                           ''; // if user comes back to change something the drug list is appended to previous drug list so initializing it back to '' (empty string)
+                      j = 0;
                       for (int i = 0; i < 12; i++) {
                         if (hrisaHypertensionDrug[i] == true &&
                             (hrisaHypertension.hrisaOption ?? false)) {
-                          hrisaHypertensionDrugString +=
-                              hrisaHypertensionDrugNames[i] + ', ';
+                          hrisaHypertensionDrugString += ' ' +
+                              (j + 1).toString() +
+                              '. ' +
+                              hrisaHypertensionDrugNames[i];
+                          j += 1;
                         }
                       }
                       if (hrisaOtherHypertensionDrugs.input != null &&
                           (hrisaHypertension.hrisaOption ?? false)) {
-                        hrisaHypertensionDrugString +=
+                        hrisaHypertensionDrugString += ' ' +
+                            (j + 1).toString() +
+                            '. ' +
                             hrisaOtherHypertensionDrugs.input;
                         hrisaOtherHypertensionDrugs.input = '';
                       }
@@ -279,19 +291,28 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                       //Other Conditions Details
                       hrisaOtherConditionString =
                           ''; // if user comes back to change something the drug list is appended to previous drug list so initializing it back to '' (empty string)
+                      j = 0;
                       for (int i = 0; i < 8; i++) {
                         if (hrisaOtherConditionExist[i] == true) {
-                          hrisaOtherConditionString +=
-                              hrisaOtherConditionNames[i] + ', ';
+                          hrisaOtherConditionString += ' ' +
+                              (j + 1).toString() +
+                              '. ' +
+                              hrisaOtherConditionNames[i];
+                          j += 1;
                         }
                       }
                       if (hrisaOtherConditions.input != null) {
-                        hrisaOtherConditionString += hrisaOtherConditions.input;
+                        hrisaOtherConditionString += ' ' +
+                            (j + 1).toString() +
+                            '. ' +
+                            hrisaOtherConditions.input;
                       }
                       hrisaValues.hrisaOtherConditionsString =
-                          hrisaOtherConditionString.substring(0, hrisaOtherConditionString.length);
+                          hrisaOtherConditionString.substring(
+                              0, hrisaOtherConditionString.length);
 
                       hrisaValues.printHrisaValues3();
+                      j = 0;
 
                       if (_formKey.currentState.validate()) {
                         Navigator.pushNamed(context, RiskScore.routeName);

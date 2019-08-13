@@ -111,6 +111,7 @@ class _UserConsentState extends State<UserConsent> {
                 onPressed: () {
                   FirebaseAuth.instance.currentUser().then((user) {
                     if (user != null) {
+                      print('done ${user.uid}');
                       Navigator.of(context).pop();
                       Navigator.of(context)
                           .pushReplacementNamed(CompleteConsent.routeName);

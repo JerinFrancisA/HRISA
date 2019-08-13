@@ -6,6 +6,7 @@ import 'package:hrisa/utilities/constants.dart';
 
 class CompleteConsent extends StatefulWidget {
   static const routeName = 'ConsentGiven';
+
   @override
   _CompleteConsentState createState() => _CompleteConsentState();
 }
@@ -20,6 +21,7 @@ class _CompleteConsentState extends State<CompleteConsent> {
     this.uid = '';
     FirebaseAuth.instance.currentUser().then((val) {
       setState(() {
+        print(val.uid);
         this.uid = val.uid;
       });
     }).catchError((e) {
@@ -31,36 +33,36 @@ class _CompleteConsentState extends State<CompleteConsent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Consent Given',
-            style: kHrisaText,
+      appBar: AppBar(
+        title: Text(
+          'Consent Given',
+          style: kHrisaText,
+        ),
+      ),
+      body: Center(
+        child: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('OTP verified', style: kHrisaText),
+              SizedBox(
+                height: 15.0,
+              ),
+              BottomButton(
+                text: 'PROCEED',
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut().then((action) {
+                    Navigator.of(context)
+                        .pushReplacementNamed(Screening.routeName);
+                  }).catchError((e) {
+                    print(e);
+                  });
+                },
+              ),
+            ],
           ),
         ),
-        body: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('OTP verified', style: kHrisaText),
-                SizedBox(
-                  height: 15.0,
-                ),
-                BottomButton(
-                  text:'PROCEED',
-                  onPressed: () {
-                    FirebaseAuth.instance.signOut().then((action) {
-                      Navigator
-                          .of(context)
-                          .pushReplacementNamed(Screening.routeName);
-                    }).catchError((e) {
-                      print(e);
-                    });
-                  },
-                ),
-              ],
-            ),
-          ),
-        ));
+      ),
+    );
   }
 }

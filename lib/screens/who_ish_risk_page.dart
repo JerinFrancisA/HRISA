@@ -4,6 +4,8 @@ import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/utilities/risk_value.dart';
+import 'package:hrisa/utilities/advices.dart';
+
 class RiskScore extends StatefulWidget {
   static const routeName = 'RiskScore';
 
@@ -111,6 +113,8 @@ class _RiskScoreState extends State<RiskScore> {
                 text: 'Recommendation',
                 onPressed: () {
                   hrisaValues.hrisaRisk = hrisaRisk;
+                  hrisaValues.hrisaRecommendation = advices[hrisaValues.hrisaRisk];
+                  hrisaValues.printHrisaValues4();
                   Navigator.pushNamed(context, Recommendation.routeName);
                 },
               ),
