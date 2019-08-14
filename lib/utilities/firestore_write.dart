@@ -20,12 +20,13 @@ Future<void> createHrisaPatientDocument() async {
       'Cholestrol Level': hrisaValues.hrisaCholestrolLevel,
       'Waist Hip Ratio': hrisaValues.hrisaWaistHipRatio,
       'Diabetes Mellitius': hrisaValues.hrisaDiabetesMellitius,
-      'Diabetes Mellitius Drugs':
-          hrisaValues.hrisaDiabetesMellitiusDrugString,
+      'Diabetes Mellitius Drugs': hrisaValues.hrisaDiabetesMellitiusDrugString,
       'Hypertension': hrisaValues.hrisaHypertension,
       'Hypertension Drugs': hrisaValues.hrisaHypertensionDrugString,
       'Smoker': hrisaValues.hrisaSmoker,
-      'Other Conditions ': hrisaValues.hrisaOtherConditionsString,
+      'Other Conditions ': hrisaValues.hrisaOtherConditionsString == '1. '
+          ? ''
+          : hrisaValues.hrisaOtherConditionsString,
       'Risk': hrisaValues.hrisaRisk,
       'Recommendation': hrisaValues.hrisaRecommendation,
     },

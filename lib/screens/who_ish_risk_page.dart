@@ -74,7 +74,7 @@ class _RiskScoreState extends State<RiskScore> {
         return ;
       }
     refv = setAge() + setSex() + setDiabetes() + setSmk() + setSbp() + setCholestrol();
-    hrisaRisk=hrisaRiskValues[int.parse(refv)];
+    hrisaRisk = hrisaRiskValues[int.parse(refv)];
 
   }
   @override
@@ -101,7 +101,7 @@ class _RiskScoreState extends State<RiskScore> {
               ),
               SizedBox(height: 80.0),
               Text(
-                hrisaRisk,
+                hrisaRisk??'<=10%',
                 style: kHrisaText.copyWith(
                   fontSize: 45.0,
                   fontWeight: FontWeight.w800,

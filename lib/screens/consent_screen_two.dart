@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/screens/screening_screen.dart';
 import 'package:hrisa/utilities/constants.dart';
-import 'package:hrisa/utilities/send_otp.dart';
+import 'package:hrisa/utilities/sms_otp.dart';
 
 class CompleteConsent extends StatefulWidget {
   static const routeName = 'ConsentGiven';
@@ -16,7 +16,7 @@ class _CompleteConsentState extends State<CompleteConsent> {
 
   getUid() {}
 
-  @override
+//  @override
 //  void initState() {
 //    this.uid = '';
 //    FirebaseAuth.instance.currentUser().then((val) {

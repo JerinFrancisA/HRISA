@@ -5,8 +5,10 @@ import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:hrisa/utilities/advices.dart';
 import 'package:hrisa/utilities/firestore_write.dart';
-import 'package:hrisa/utilities/send_report.dart';
+import 'package:hrisa/utilities/sms_report.dart';
+import 'package:hrisa/utilities/pdf_hrisa.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:open_file/open_file.dart';
 
 class Recommendation extends StatefulWidget {
   static const routeName = 'Recommendation';
@@ -23,10 +25,9 @@ class _RecommendationState extends State<Recommendation> {
     setState(() {
       showSpinner = true;
     });
-    hrisaValues.hrisaRecommendation = advices[hrisaValues.hrisaRisk];
     try {
       await createHrisaPatientDocument();
-      await sendSMS(); //in utilities/send_report.dart
+     // await sendReport(); //in utilities/send_report.dart
     } catch (e) {
       print(e);
       setState(() {
@@ -76,15 +77,18 @@ class _RecommendationState extends State<Recommendation> {
                 BottomButton(
                   text: 'Print PDF',
                   onPressed: () {
-                    //createHrisaPatientDocument();
+                    generatePdf();
+                    OpenFile.open(pathToPdf);
                   },
                 ),
                 BottomButton(
                   text: 'Screen Next',
                   onPressed: () async {
+//                    hrisaValues.hrisaRecommendation = advices[hrisaValues.hrisaRisk];
                     print(user.uid);
                     try {
                       await sendToCollection();
+                      await sendReport();
 
                       Navigator.pushNamedAndRemoveUntil(
                           context,
@@ -101,10 +105,11 @@ class _RecommendationState extends State<Recommendation> {
                 BottomButton(
                   text: 'Log Out',
                   onPressed: () async {
+//                    hrisaValues.hrisaRecommendation = advices[hrisaValues.hrisaRisk];
                     print(user.uid);
                     try {
                       await sendToCollection();
-
+                      await sendReport();
                       await auth.signOut();
 
                       Navigator.pushNamedAndRemoveUntil(

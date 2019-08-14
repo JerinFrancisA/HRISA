@@ -6,7 +6,7 @@ import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
 import 'package:hrisa/utilities/constants.dart';
-import 'package:hrisa/utilities/send_otp.dart';
+import 'package:hrisa/utilities/sms_otp.dart';
 
 class UserConsent extends StatefulWidget {
   static const routeName = 'GiveConsent';
@@ -19,6 +19,7 @@ class _UserConsentState extends State<UserConsent> {
   //String phoneNo;
   String smsCode;
   String verificationId;
+  String countryCode = '+91';
 
 //  Future<void> verifyPhone() async {
 //    final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
@@ -68,7 +69,7 @@ class _UserConsentState extends State<UserConsent> {
               fontSize: 20.0,
               color: kTextFormFieldTextColor,
             ),
-            maxLength: 6,
+            maxLength: 4,
             decoration: InputDecoration.collapsed(hintText: null).copyWith(
               contentPadding: EdgeInsets.all(26.0),
               labelText: 'OTP',
@@ -77,7 +78,7 @@ class _UserConsentState extends State<UserConsent> {
                 letterSpacing: 3.0,
                 color: kLabelTextColor,
               ),
-              hintText: 'XXXXXX',
+              hintText: 'XXXX',
               hintStyle: kHrisaText.copyWith(
                 fontSize: 12.0,
                 letterSpacing: 3.0,
@@ -142,16 +143,16 @@ class _UserConsentState extends State<UserConsent> {
 
   var hrisaPhoneNumber = InputBox(
     text: 'Phone',
-    maxLength: 13,
+    maxLength: 10,
     keyBoardType: TextInputType.number,
-    initialValue: '+91',
-    hintText: '(+91) Enter 10 digit Phone number',
+//    initialValue: '+91',
+    hintText: 'Enter 10 digit Phone number',
     validator: (value) =>
         isValidPhoneNumber(value) ? null : 'Phone number must be 10 digits',
   );
 
   static bool isValidPhoneNumber(String input) {
-    final RegExp regex = new RegExp(r'^\+\d\d\d\d\d\d\d\d\d\d\d\d$');
+    final RegExp regex = new RegExp(r'^\d\d\d\d\d\d\d\d\d\d$');
     return regex.hasMatch(input);
   }
 
@@ -186,8 +187,8 @@ class _UserConsentState extends State<UserConsent> {
                   onPressed: () async{
                     _submitForm();
                     print(hrisaPhoneNumber.input);
-                    hrisaValues.hrisaPhoneNumber = hrisaPhoneNumber.input;
-                    sendOTP();
+                    hrisaValues.hrisaPhoneNumber = countryCode + hrisaPhoneNumber.input;
+                    sendOtp();
                     await smsCodeDialog(context);
                   },
                 )
