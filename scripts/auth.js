@@ -1,7 +1,5 @@
-// get data
-//add admin cloud functions
-//const json2csv = require("json2csv").parse;
 
+//add admin cloud functions
 const adminForm = document.querySelector('.admin-actions');
 adminForm.addEventListener('submit',(e)=>{
     e.preventDefault();
@@ -13,35 +11,27 @@ adminForm.addEventListener('submit',(e)=>{
     })
 })
 
-
 // auth status changes
 const sipForm = document.querySelector('#signup-form');
 const sname = sipForm['signup-name'].value;
 auth.onAuthStateChanged(user=>{
-    //console.log(user);
     if(user){
-        //console.log('user logged in',user);
         user.getIdTokenResult().then(idTokenResult=>{
             user.admin=idTokenResult.claims.admin;
             setupUI(user);
         })
     }else{
-        console.log(user);
         setupUI();
     }
 })
 
-
-
-
-
 //signup
-
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     const uemail = signupForm['signup-email'].value;
-    const uname = signupForm['signup-name'].value;
+    const tuname = signupForm['signup-name'].value;
+    const uname = tuname.replace(' ','_').toLowerCase();
     const upassword = signupForm['signup-password'].value;
     
     const addUsers = functions.httpsCallable('addUsers');
@@ -60,7 +50,8 @@ signupForm.addEventListener('submit',(e)=>{
                 'Weight':'XX',
                 'Bmi':'XX',
                 'Heart Rate':'XX',
-                'Blood Pressure':'XX',
+                'Systolic Blood Pressure':'XX',
+                'Diastolic Blood Pressure':'XX',
                 'Oxygen Saturation': 'XX',
                 'Cholestrol Level': 'XX',
                 'Waist Hip Ratio':'XX',
@@ -69,9 +60,9 @@ signupForm.addEventListener('submit',(e)=>{
                 'Hypertension':'XX',
                 'Hypertension Drugs':'XX',
                 'Smoker':'XX',
+                'Alcohol':'XX',
                 'Other Conditions ':'XX',
-                'Risk':'0',
-                'Recommendation':00
+                'Risk':'0'
               })
         }
         const modal = document.querySelector('#modal-signup');
@@ -80,18 +71,6 @@ signupForm.addEventListener('submit',(e)=>{
     }).catch(err=>{
         console.log(err.message);
     })
-    /*.then(()=>{
-        db.collection(`${uname}`).doc('TEST').set({
-            name:uname
-        })
-        
-        const modal = document.querySelector('#modal-signup');
-            M.Modal.getInstance(modal).close();
-            signupForm.reset();
-    }).catch(err=>{
-        console.log(err);
-    })*/
-
 })
 
 //logout
@@ -102,7 +81,6 @@ logout.addEventListener('click',(e)=>{
 })
 
 //login
-
 const loginForm = document.querySelector('#login-form');
 loginForm.addEventListener('submit',(e)=>{
     e.preventDefault();
@@ -127,18 +105,18 @@ const dataForm = document.querySelector('.data-actions');
 let jsond=[];
 dataForm.addEventListener('submit',(e)=>{
     e.preventDefault();
-    const hname = document.querySelector('#hospital-name').value;
+    const h1name = document.querySelector('#hospital-name').value;
+    const hname = h1name.replace(' ','_').toLowerCase();
+    console.log(hname);
     const collectionName = db.collection(`${hname}`);
     //console.log(collectionName);
     db.collection(`${hname}`).get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        //console.log(doc.id, '=>', doc.data());
         const dats = doc.data();
         jsond.push(dats);
       })
       var array = jsond;
-      //console.log(array);
       if(array.length==0){
           alert('No such hospital exists');
           dataForm.reset();
@@ -162,10 +140,6 @@ dataForm.addEventListener('submit',(e)=>{
             str1 += line + '\r\n';
         }
         str = details+'\r\n'+str1
-        //console.log('Data in csv is ',str);
-        //const ud = 'undefined'
-        //console.log(str);
-        
             var exportedFilenmae =  hname+'-'+date+'/'+month+'/'+year+'.csv'
             var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
             if (navigator.msSaveBlob) { // IE 10+
@@ -192,6 +166,3 @@ dataForm.addEventListener('submit',(e)=>{
       console.log('Error getting documents', err);
     })
 });
-
-//// ISSUES TO BE RESOLVED
-// 2.NOT HANDLING COMMA SEPRATED FIELDS

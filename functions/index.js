@@ -3,6 +3,7 @@ const admin = require('firebase-admin');
 
 admin.initializeApp();
 
+// create other admins
 exports.addAdminRole = functions.https.onCall((data,context)=>{
     //check request is made by an admin
     if(context.auth.token.admin!==true){
@@ -22,6 +23,8 @@ exports.addAdminRole = functions.https.onCall((data,context)=>{
     });
 });
 
+
+// cloud function to create user
 exports.addUsers = functions.https.onCall((data,context)=>{
     if(context.auth.token.admin!==true){
         return {error:'Only admins can Add'}
