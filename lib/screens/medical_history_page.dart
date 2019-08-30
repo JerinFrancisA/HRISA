@@ -37,6 +37,10 @@ class _MedicalHistoryState extends State<MedicalHistory> {
     text: 'Smoker',
     drugRadio: false,
   );
+  var hrisaAlcoholic = YesNoRadio(
+    text: 'Alcoholic',
+    drugRadio: false,
+  );
   bool hrisaChronicHeartDisease = false; //initial value of checkbox 1
   bool hrisaIschemicHeartDisease = false; //initial value of checkbox 2
   bool hrisaStroke = false; //initial value of checkbox 3
@@ -215,6 +219,7 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                     ),
                   ),
                   hrisaSmoker,
+                  hrisaAlcoholic,
                   SubHeadingText(
                     text: 'Other diseases if any',
                   ),
@@ -287,6 +292,8 @@ class _MedicalHistoryState extends State<MedicalHistory> {
                           hrisaHypertensionDrugString;
                       hrisaValues.hrisaSmoker =
                           hrisaSmoker.hrisaOption ?? false;
+                      hrisaValues.hrisaAlcoholic =
+                          hrisaAlcoholic.hrisaOption ?? false;
 
                       //Other Conditions Details
                       hrisaOtherConditionString =

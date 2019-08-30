@@ -5,12 +5,18 @@ import 'package:hrisa/custom_widgets/sub_heading_text.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:intl/intl.dart';
 
+///The initial DOB and Age values are stored in these variables.
+
 var hrisaDob = DateTime.now().toString();
 var hrisaAge = 0;
 
 class FindAge {
   String toFindAge;
   int pAge = 0;
+
+  /// This function is the most important part of this file. It calculates the
+  /// Age and updates it to [MyAge] class so that the user need not enter the
+  /// Age manually.
 
   void findAge(selected) {
     toFindAge = DateFormat('dd/MM/yyyy').format(selected);
@@ -51,6 +57,11 @@ class _MyCalendarState extends State<MyCalendar> {
 
   _MyCalendarState({@required this.ageOrDob});
 
+  /// Opens calendar with the initial value of [initialDate] and the minimum value
+  /// of Date is set by [firstDate] and the maximum value is set by [lastDate].
+  /// [builder] is the calendar which will be opened. It can be customised by
+  /// returning a [Theme] and the [Theme.data] property can be modified.
+
   _showDateTimePicker() async {
     selected = await showDatePicker(
       context: context,
@@ -76,6 +87,9 @@ class _MyCalendarState extends State<MyCalendar> {
     });
     //selectedValue = DateFormat('dd/MM/yyyy').format(selected);
   }
+
+  /// Using ternary operator to set [Mydate.ageText] to today's date if null
+  /// initially or to the date which is set by user(selected).
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +121,9 @@ class _MyCalendarState extends State<MyCalendar> {
                     _showDateTimePicker();
                   },
                   elevation: 5.0,
+
+                  /// To display calendar icon with certain opacity.
+
                   child: Opacity(
                     opacity: 0.6,
                     child: Icon(

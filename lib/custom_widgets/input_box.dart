@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+/// [InputBox] inherits [StatefulWidget]
+///
+/// This custom widget is used for all input boxes used in the application. Uses a
+/// [TextFormField] widget.
+///
+/// The important property of this widget is the [input]. [input] property is used
+/// to trap the text entered in the input box.
+///
+/// A [validator] property is added is a default validation function which doesn't
+/// allow a the input box to be left empty. or a validator function can be passed
+/// to customize [validator] according to users need.
+///
+/// The [text], [hintText] properties can be changed to make use of [InputBox].
+/// [obscureText] property can be set as true in case of password field.
+///
+/// The text use default style of [kHrisaText], which can be change in the
+/// utilities/constants.dart file
+
 class InputBox extends StatelessWidget {
   final text;
   final keyBoardType;

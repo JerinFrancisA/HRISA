@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+/// [SexCheckbox] extends a [StatefulWidget] and is used ONLY in the
+/// screens/input_page.dart to select the Sex of the person being screened.
+///
+/// An enum Sex is used with four values. [Sex.NONE] value is not rendered in the
+/// screen and is used to keep the Sex unselected initially so that the patient
+/// can select the Sex manually.
+///
+/// The [input] property is used to get the value of the Sex selected currently.
+///
+/// [ListTile] is used as a CheckBox with [ListTile.leading] being the [Radio]
+/// widget and the [ListTile.title] being the Sex category.
+
 enum Sex { NONE, MALE, FEMALE, TRANSGENDER }
 //NONE is not rendered on screen. It is to keep sex unchecked initially.
 
@@ -16,6 +28,11 @@ class _SexCheckboxState extends State<SexCheckbox> {
   final _formKey = GlobalKey<FormState>();
 
   void setInputValue(x) {
+
+    /// [widget] is a powerful property which can be thought as an analogue of
+    /// super keyword in any OOP paradigm. widget keyword can be used to access
+    /// thr properties of the Super class of this State class.
+
     x == Sex.MALE
         ? widget.input = 'Male'
         : x == Sex.FEMALE

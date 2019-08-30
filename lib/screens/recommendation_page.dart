@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/screens/login_page.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
@@ -27,7 +28,7 @@ class _RecommendationState extends State<Recommendation> {
     });
     try {
       await createHrisaPatientDocument();
-     // await sendReport(); //in utilities/send_report.dart
+      // await sendReport(); //in utilities/send_report.dart
     } catch (e) {
       print(e);
       setState(() {
@@ -63,15 +64,27 @@ class _RecommendationState extends State<Recommendation> {
                 ),
                 SizedBox(height: 30.0),
                 Text(
-                  advices[hrisaValues.hrisaRisk],
+                  advices[hrisaValues.hrisaRisk] ?? 'err',
                   style: kHrisaText,
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 30.0),
                 BottomButton(
                   text: 'Finish',
-                  onPressed: () {
+                  onPressed: () async {
                     //createHrisaPatientDocument();
+                    try {
+                      await sendToCollection();
+                      if (hrisaValues.hrisaPhoneNumber != '') {
+                        await sendReport();
+                      }
+                    } catch (e) {
+                      print(e);
+                      setState(() {
+                        showSpinner = false;
+                      });
+                    }
+                    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
                   },
                 ),
                 BottomButton(
@@ -88,7 +101,10 @@ class _RecommendationState extends State<Recommendation> {
                     print(user.uid);
                     try {
                       await sendToCollection();
-                      await sendReport();
+                      print(hrisaValues.hrisaPhoneNumber);
+                      if (hrisaValues.hrisaPhoneNumber != '') {
+                        await sendReport();
+                      }
 
                       Navigator.pushNamedAndRemoveUntil(
                           context,
@@ -109,7 +125,9 @@ class _RecommendationState extends State<Recommendation> {
                     print(user.uid);
                     try {
                       await sendToCollection();
-                      await sendReport();
+                      if (hrisaValues.hrisaPhoneNumber != '') {
+                        await sendReport();
+                      }
                       await auth.signOut();
 
                       Navigator.pushNamedAndRemoveUntil(

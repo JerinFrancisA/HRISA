@@ -44,7 +44,7 @@ class DisplayBox extends StatelessWidget {
               GestureDetector(
                 onTap: onTap,
                 child: Text(
-                  'Update BMI',
+                  'Tap to update',
                   style: kHrisaText.copyWith(
                     fontSize: 15.0,
                     color: kBottomButtonColor.withOpacity(0.85),

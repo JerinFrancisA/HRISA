@@ -7,6 +7,8 @@ import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/custom_widgets/display_box.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+enum HeightUnit { cm, inch }
+
 class Screening extends StatefulWidget {
   static const routeName = 'Screening';
 
@@ -16,23 +18,40 @@ class Screening extends StatefulWidget {
 
 class _ScreeningState extends State<Screening> {
   final _formKey = GlobalKey<FormState>();
+  bool isCm = true, isInch = false;
 
   //TextFields. Declared separately so as to get the values to store in FireBase.
 
-  var hrisaHeight = InputBox(
+  var hrisaHeightCm = InputBox(
     text: 'Height',
     keyBoardType: TextInputType.number,
     hintText: 'Enter Height in cms',
   );
+  var feet = InputBox(
+    text: 'Feet',
+    keyBoardType: TextInputType.number,
+    hintText: 'Enter feet',
+  );
+  var inches = InputBox(
+    text: 'Inches',
+    keyBoardType: TextInputType.number,
+    hintText: 'Enter inches',
+  );
+  double hrisaHeightInchValueAfterConversion;
   var hrisaWeight = InputBox(
     text: 'Weight',
     keyBoardType: TextInputType.number,
     hintText: 'Enter Weight in kgs',
   );
   var hrisaBloodPressure = InputBox(
-    text: 'Blood Pressure',
+    text: 'Systolic Blood Pressure',
     keyBoardType: TextInputType.number,
     hintText: 'Enter Blood Pressure',
+  );
+  var hrisaDiastolicBloodPressure = InputBox(
+    text: 'Diastolic Blood Pressure',
+    keyBoardType: TextInputType.number,
+    hintText: 'Enter Diastolic Blood Pressure',
   );
   var hrisaHeartRate = InputBox(
     text: 'Heart Rate',
@@ -52,19 +71,54 @@ class _ScreeningState extends State<Screening> {
     hintText: '(Optional) Enter Cholestrol level',
     validator: (val) => val.isEmpty ? null : null,
   );
-  var hrisaWaistHipRatio = InputBox(
-    text: 'Waist Hip Ratio',
+  var hrisaWaistCircumference = InputBox(
+    text: 'Waist Circumference',
     keyBoardType: TextInputType.number,
-    hintText: '(Optional) Enter Waist Hip ratio',
+    hintText: '(Optional) Enter Waist Circumference',
     validator: (val) => val.isEmpty ? null : null,
   );
-  double hrisaBmi = 0.0;
+  var hrisaHipCircumference = InputBox(
+    text: 'Hip Circumference',
+    keyBoardType: TextInputType.number,
+    hintText: '(Optional) Enter Hip Circumference',
+    validator: (val) => val.isEmpty ? null : null,
+  );
 
-  void calcBmi() {
+//  var hrisaWaistHipRatio = InputBox(
+//    text: 'Waist Hip Ratio',
+//    keyBoardType: TextInputType.number,
+//    hintText: '(Optional) Enter Waist Hip ratio',
+//    validator: (val) => val.isEmpty ? null : null,
+//  );
+  double hrisaBmi = 0.0;
+  String hrisaWaistHipRatio = '';
+
+  void calcBmiCm() {
     _submitForm();
-    var height = hrisaHeight.input;
+    var height = hrisaHeightCm.input;
     var weight = hrisaWeight.input;
     hrisaBmi = double.parse(weight) / pow((double.parse(height) / 100), 2);
+  }
+
+  void calcBmiInches() {
+    _submitForm();
+    var heightFeet = feet.input;
+    var heightInches = inches.input;
+    double height = (double.parse(heightFeet) * 30.48) +
+        (double.parse(heightInches) * 2.54);
+    hrisaHeightInchValueAfterConversion = height;
+    var weight = hrisaWeight.input;
+    hrisaBmi = double.parse(weight) /
+        pow((hrisaHeightInchValueAfterConversion / 100), 2);
+  }
+
+  void calcWaistHipRatio() {
+    _submitForm();
+    var waistCirumference = hrisaWaistCircumference.input;
+    var hipCircumference = hrisaHipCircumference.input;
+    hrisaWaistHipRatio =
+        (double.parse(waistCirumference) / double.parse(hipCircumference))
+            .toStringAsFixed(2);
   }
 
   void _submitForm() {
@@ -102,42 +156,109 @@ class _ScreeningState extends State<Screening> {
                       ),
                     ),
                   ),
-                  hrisaHeight,
+                  Column(
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text(
+                          isCm ? 'ft/inch' : 'cm',
+                          style: kHrisaText.copyWith(fontSize: 12.0),
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            isCm = !isCm;
+                            isInch = !isInch;
+                          });
+                        },
+                      ),
+                      Visibility(
+                        visible: isCm,
+                        child: hrisaHeightCm,
+                      ),
+                      Visibility(
+                        visible: isInch,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            feet,
+                            inches,
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                   hrisaWeight,
                   GestureDetector(
                     onTap: () {
-                      calcBmi();
+                      if (isCm) {
+                        calcBmiCm();
+                      } else {
+                        calcBmiInches();
+                      }
                       setState(() {});
                     },
                     child: DisplayBox(
                       topText: 'BMI',
                       text: hrisaBmi.toStringAsFixed(2),
                       onTap: () {
+                        if (isCm) {
+                          calcBmiCm();
+                        } else {
+                          calcBmiInches();
+                        }
                         setState(() {});
                       },
                     ),
                   ),
                   hrisaBloodPressure,
+                  hrisaDiastolicBloodPressure,
                   hrisaHeartRate,
                   hrisaOxygenSaturation,
                   hrisaCholestrolLevel,
-                  hrisaWaistHipRatio,
+                  hrisaWaistCircumference,
+                  hrisaHipCircumference,
+                  GestureDetector(
+                    onTap: () {
+                      calcWaistHipRatio();
+                      setState(() {});
+                    },
+                    child: DisplayBox(
+                      topText: 'Waist Hip Ratio',
+                      text: hrisaWaistHipRatio,
+                      onTap: () {
+                        if (isCm) {
+                          calcBmiCm();
+                        } else {
+                          calcBmiInches();
+                        }
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                  //hrisaWaistHipRatio,
                   BottomButton(
                     text: 'Next',
                     onPressed: () {
-                      calcBmi();
+                      if (isCm) {
+                        calcBmiCm();
+                      } else {
+                        calcBmiInches();
+                      }
                       _submitForm();
 
-                      hrisaValues.hrisaHeight = hrisaHeight.input;
+                      hrisaValues.hrisaHeight = isCm
+                          ? hrisaHeightCm.input
+                          : hrisaHeightInchValueAfterConversion;
                       hrisaValues.hrisaWeight = hrisaWeight.input;
                       hrisaValues.hrisaBmi = hrisaBmi.toStringAsFixed(2) ?? 0.0;
                       hrisaValues.hrisaHeartRate = hrisaHeartRate.input;
                       hrisaValues.hrisaBloodPressure = hrisaBloodPressure.input;
+                      hrisaValues.hrisaDiastolicBloodPressure =
+                          hrisaDiastolicBloodPressure.input;
                       hrisaValues.hrisaOxygenSaturation =
                           hrisaOxygenSaturation.input;
                       hrisaValues.hrisaCholestrolLevel =
                           hrisaCholestrolLevel.input;
-                      hrisaValues.hrisaWaistHipRatio = hrisaWaistHipRatio.input;
+                      hrisaValues.hrisaWaistHipRatio = hrisaWaistHipRatio;
 
                       hrisaValues.printHrisaValues2();
 

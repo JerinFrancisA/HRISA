@@ -4,6 +4,7 @@ import 'package:hrisa/screens/input_page.dart';
 String address = hrisaValues.hrisaPhoneNumber;
 
 Future<void> sendReport() async {
+  address = hrisaValues.hrisaPhoneNumber;
   print(hrisaValues.hrisaPhoneNumber);
   SmsSender sender = new SmsSender();
   String greeting = '';
@@ -14,7 +15,7 @@ Future<void> sendReport() async {
       greeting =
       'Greetings from HRI. In case of chest pain or symptoms of heartattack, call the Toll Free number 1800-123-1133. Your CVD risk score is <10% and we recommend :';
       recommendation =
-          '\n1. Practice Healthy Diet, Life style & Exercise regularly';
+          '1. Practice Healthy Diet, Life style & Exercise regularly';
       break;
     case '10% to <20%':
       greeting =
@@ -44,6 +45,8 @@ Future<void> sendReport() async {
 
   await sender.sendSms(new SmsMessage(address, greeting));
   await sender.sendSms(new SmsMessage(address, recommendation));
+
+  hrisaValues.hrisaPhoneNumber = '';
 }
 
 //and we recommend:\n$recommendation.\n

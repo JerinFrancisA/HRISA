@@ -2,6 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:intl/intl.dart';
 
+/// [MyDate] extends a [StatelessWidget] which is passed inside a [Stateful] widget
+/// inside the screens/input_page.dart.
+///
+/// This widget is used to display the DOB in the application. When the user selects
+/// date from the calendar it automatically updates the DOB and Age in the App.
+///
+/// The [ageOrDob] property is again to display text to indicate whether its 'Age'
+/// or 'DOB'. So a proper string is to be passed.
 
 class MyDate extends StatelessWidget {
   MyDate({@required this.selected, this.ageOrDob});
@@ -35,6 +43,9 @@ class MyDate extends StatelessWidget {
               ),
               SizedBox(height: 10.0),
               Text(
+
+                /// Set date format to dd/MM/yyy
+
                 DateFormat('dd/MM/yyyy').format(selected),
                 style: kHrisaText.copyWith(
                   fontSize: 20.0,

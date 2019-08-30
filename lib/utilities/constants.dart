@@ -14,3 +14,17 @@ const kHrisaText = TextStyle(
   fontWeight: FontWeight.bold,
   letterSpacing: 2.0,
 );
+
+const kHrisaPdfTitle = TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+  letterSpacing: 3.0,
+);
+
+const kHrisaPdfText = TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: 30.0,
+  fontWeight: FontWeight.w600,
+  letterSpacing: 2.0,
+);

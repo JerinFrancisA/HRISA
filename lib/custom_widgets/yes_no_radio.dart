@@ -1,6 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+/// This particular widget is used in the screens/medical_history.dart page for
+/// selecting is a patient is a Diabetic / Smoker / Alcoholic / Hypertensive. It
+/// is a simple Yes/No checkbox, which again uses a [ListTile] as a CheckBox with
+/// [ListTile.leading] being the [Radio] widget and the [ListTile.title] being the
+/// Yes/No option.
+///
+/// The [text] is a required property and represents the checkbox/radio type, for
+/// eg: Diabetic Mellitius.
+///
+/// [hrisaOption] is the most important property used to get the Yes/No value which
+/// is selected.
+///
+/// If [hrisaOption] is 'Yes' then the [Visibility.visible] property is set to true
+/// and the Drug selection option for the particular type of disease is enabled.
+
 enum Option { YES, NO }
 
 class YesNoRadio extends StatefulWidget {

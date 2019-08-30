@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+/// [MyAge] widget is used to display the Age of the patient.
+///
+/// It extends from [StatelessWidget]
+///
+/// The property [ageOrDob] is a String value which is to be passed. Generally pass
+/// 'Age', so that 'Age' is displayed in the application above the DisplayBox.
+///
+/// [ageText] is the actual age of the patient.
+
 class MyAge extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 

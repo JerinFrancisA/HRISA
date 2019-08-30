@@ -90,6 +90,7 @@ class Hrisa {
   var hrisaBmi;
   var hrisaHeartRate;
   var hrisaBloodPressure;
+  var hrisaDiastolicBloodPressure;
   var hrisaOxygenSaturation;
   var hrisaCholestrolLevel;
   var hrisaWaistHipRatio;
@@ -100,6 +101,7 @@ class Hrisa {
   var hrisaHypertension;
   String hrisaHypertensionDrugString = '';
   var hrisaSmoker;
+  var hrisaAlcoholic;
   String hrisaOtherConditionsString = '';
 
   //from risk_page

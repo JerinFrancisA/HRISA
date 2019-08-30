@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:hrisa/utilities/constants.dart';
 
+/// [HeadingText] inherits [StatelessWidget]
+///
+/// This custom widget is used for all Headings used in the application. Uses a
+/// standard [Text] widget.
+///
+/// The [text] property is a @required which is to be passed. This [text] is hence
+/// the Heading which will be rendered.
+///
+/// The [text] uses default textStyle of [kHrisaText], which can be change in the
+/// utilities/constants.dart file
+///
+/// The [text] uses default color of [kHeadingColor], which can be change in the
+/// utilities/constants.dart file
+
 class HeadingText extends StatelessWidget {
   final text;
   final style;
@@ -18,6 +32,7 @@ class HeadingText extends StatelessWidget {
           letterSpacing: 3.0,
           color: kHeadingColor,
         ),
+        textAlign: TextAlign.center,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:hrisa/custom_widgets/input_box.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
+import 'package:hrisa/custom_widgets/heading_text.dart';
 import 'package:hrisa/utilities/constants.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
@@ -53,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
+                        HeadingText(text: 'Log in with Hospital Id and password'),
                         hrisaEmail,
                         hrisaPassword,
                         BottomButton(
