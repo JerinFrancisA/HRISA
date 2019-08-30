@@ -7,7 +7,6 @@ import 'package:pdf/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:printing/printing.dart';
-import 'package:hrisa/screens/input_page.dart';
 
 String pathToPdf = "";
 

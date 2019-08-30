@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:hrisa/screens/recommendation_page.dart';
 import 'package:hrisa/custom_widgets/bottom_button.dart';
