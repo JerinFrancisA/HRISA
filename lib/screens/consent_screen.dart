@@ -295,23 +295,20 @@ class _UserConsentState extends State<UserConsent> {
                           sendOtp();
                           await smsCodeDialog(context);
                         },
-                      )
+                      ),
+                      BottomButton(
+                        text: 'WITHOUT OTP',
+                        onPressed: () {
+                          otp = '';
+                          hrisaValues.hrisaPhoneNumber = '';
+                          Navigator.of(context)
+                              .pushReplacementNamed(Screening.routeName);
+                        },
+                      ),
                     ],
                   ),
                 ),
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30.0, right: 30.0),
-            child: BottomButton(
-              text: 'WITHOUT OTP',
-              onPressed: () {
-                otp = '';
-                hrisaValues.hrisaPhoneNumber = '';
-                Navigator.of(context)
-                    .pushReplacementNamed(Screening.routeName);
-              },
             ),
           ),
         ],

@@ -7,8 +7,16 @@ import 'package:pdf/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:hrisa/screens/input_page.dart';
 import 'package:printing/printing.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-String pathToPdf = "";
+String pathToPdf = '';
+String emergencyNumber = '';
+
+void getEmergencyNumber() async {
+  final firestore = Firestore.instance;
+  var abc = await firestore.collection('users').document(user.uid).get();
+  emergencyNumber = await abc['phone_number'];
+}
 
 String heartRateUnit() {
   if(hrisaValues.hrisaHeartRate != '') {
@@ -24,8 +32,22 @@ String spO2Unit() {
   return 'SpO2 : ${hrisaValues.hrisaOxygenSaturation}';
 }
 
+Directory baseDir;
+
+createDir() async {
+  baseDir = await getExternalStorageDirectory();
+  print(baseDir.path);
+  var dir = Directory(baseDir.path);
+  bool dirExists = await dir.exists();
+  if(!dirExists){
+    dir.create(recursive: true);
+  }
+}
+
 void generatePdf() async {
   print('working');
+  createDir();
+  getEmergencyNumber();
 
   final Document pdf = Document();
   const imageProvider = const singleuse.AssetImage('images/hri.jpg');
@@ -210,7 +232,7 @@ void generatePdf() async {
           alignment: Alignment.center,
           margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
           child: Text(
-            'In case of chest pain or symptoms of heart attack call Toll Free No: ${user.phoneNumber.replaceAll('+91', '')},\n For all other emergencies call 080 4050 3333',
+            'In case of chest pain or symptoms of heart attack call Toll Free No: 1800 123 1133,\n For all other emergencies call $emergencyNumber',
             style: TextStyle(
               font: Font.timesItalic(),
               fontSize: 16.0,
@@ -222,10 +244,9 @@ void generatePdf() async {
     ),
   );
 
-  final output = await getApplicationDocumentsDirectory();
-  print(output.path);
-  pathToPdf = '${output.path}example.pdf';
-  final file = File(pathToPdf);
-  await file.writeAsBytes(pdf.save());
-
+//  final output = await getApplicationDocumentsDirectory();
+//  print(output.path);
+    pathToPdf = '${baseDir.path}/report.pdf';
+    final file = File(pathToPdf);
+    await file.writeAsBytes(pdf.save());
 }

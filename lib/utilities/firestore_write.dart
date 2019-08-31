@@ -31,17 +31,27 @@ void trueFalseToYesNo() {
       : hrisaValues.hrisaAlcoholic = 'No';
 }
 
+var pid;
+Future<String> getPid() async {
+  await Firestore.instance.collection(user.displayName).getDocuments().then((myDocuments){
+    pid = myDocuments.documents.length.toString();
+  });
+  int num = pid.toString().length;
+  int fillUp = 6 - num;
+  pid = user.displayName.substring(0, 3).toUpperCase() + ('0' * fillUp) + pid.toString();
+  return pid.toString();
+}
+
 Future<void> createHrisaPatientDocument() async {
   final _firestore = Firestore.instance;
   removeCommaAndCountryCodeAndOtherStringComma();
   trueFalseToYesNo();
-
-//  Firestore.instance.collection('products').getDocuments().then((myDocuments){
-//    print("${myDocuments.documents.length}");
-//  });
+  String pID = await getPid();
 
   await _firestore.collection(user.displayName).add(
-    {
+    { 'PID': pID,
+      'Date': DateTime.now().day .toString()+ '/' + DateTime.now().month.toString() + '/' + DateTime.now().year.toString(),
+      'Time': DateTime.now().millisecondsSinceEpoch.toString(),
       'Dob': hrisaValues.hrisaDob,
       'Age': hrisaValues.hrisaAge,
       'Sex': hrisaValues.hrisaSex,
