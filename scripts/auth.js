@@ -25,28 +25,38 @@ auth.onAuthStateChanged(user=>{
     }
 })
 
+let hosplist = []
 //signup
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     const uemail = signupForm['signup-email'].value;
     const tuname = signupForm['signup-name'].value;
-    const uname = tuname.replace(' ','_').toLowerCase();
+    const uname = tuname.split(' ').join('_').toLowerCase();
     const upassword = signupForm['signup-password'].value;
+    const phno = signupForm['signup-phone'].value;
+    const phoneNum = phno;
     
     const addUsers = functions.httpsCallable('addUsers');
     addUsers({email:uemail,password:upassword,displayName:uname}).then(result=>{
-        console.log(result.data);
+        //console.log(result.data);
         let hospname = result.data.displayName;
+        
+        //console.log(result.data.phoneNumber);
         if(hospname){
+            db.collection('users').doc(result.data.uid).set({
+                'phone_number': phoneNum
+              });
             db.collection(`${hospname}`).add({
-                'Name':'TEST',
+                'PID':'XX',
+                'Date':'XX',
+                'Time':'0',
                 'Dob':'XX/XX/XX',
                 'Age':00,
                 'Sex':'TEST',
                 'Address':'XX',
                 'Phone No.':'XXXXXXXXXX',
-                'Height':'XX',
+                'Height':'XX',                  
                 'Weight':'XX',
                 'Bmi':'XX',
                 'Heart Rate':'XX',
@@ -64,6 +74,10 @@ signupForm.addEventListener('submit',(e)=>{
                 'Other Conditions ':'XX',
                 'Risk':'0'
               })
+
+              
+              hosplist.push(hospname);
+              //console.log(hosplist);
         }
         const modal = document.querySelector('#modal-signup');
             M.Modal.getInstance(modal).close();
@@ -90,7 +104,14 @@ loginForm.addEventListener('submit',(e)=>{
 
     auth.signInWithEmailAndPassword(email,password)
     .then(cred =>{
-        //console.log(cred.user);
+            cred.user.getIdTokenResult().then(token=>{
+                let admino = token.claims.admin
+                console.log(admino);
+                if(!admino){
+                    alert('Only admins can login')
+                    auth.signOut();
+                }
+            })
         const modal = document.querySelector('#modal-login');
         M.Modal.getInstance(modal).close(); //close the form
         loginForm.reset();
@@ -106,11 +127,11 @@ let jsond=[];
 dataForm.addEventListener('submit',(e)=>{
     e.preventDefault();
     const h1name = document.querySelector('#hospital-name').value;
-    const hname = h1name.replace(' ','_').toLowerCase();
-    console.log(hname);
+    //const hname = h1name.replaceA(' ','_').toLowerCase();
+    const hname = h1name.split(' ').join('_').toLowerCase();
+    //console.log(hname);
     const collectionName = db.collection(`${hname}`);
-    //console.log(collectionName);
-    db.collection(`${hname}`).get()
+    db.collection(`${hname}`).orderBy('Time').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
         const dats = doc.data();
@@ -125,22 +146,25 @@ dataForm.addEventListener('submit',(e)=>{
         var str1 = '';
         var currentDate = new Date();
         var date = currentDate.getDate();
-        var month = currentDate.getMonth();
+        var month = currentDate.getMonth()+1;
         var year = currentDate.getFullYear();
         
+        let indexing = ['PID','Date','Time','Dob','Age','Phone No.','Sex','Address','Height','Weight','Bmi','Heart Rate','Systolic Blood Pressure','Diastolic Blood Pressure','Oxygen Saturation','Cholestrol Level','Waist Hip Ratio','Diabetes Mellitius','Diabetes Mellitius Drugs','Hypertension','Hypertension Drugs','Smoker','Alcoholic','Other Conditions ','Risk']
         for (var i = 0; i < array.length; i++) {
             var line = '';
             var details = ''
-            for (var index in array[i]) {
+            for (var index in indexing) {
                 if (line != '') line += ','
-                    details+= index+',';
-                line += array[i][index];
+                    details+= indexing[index]+',';
+                //console.log(details);
+                line += array[i][indexing[index]];
+                //console.log(line);
             }
 
             str1 += line + '\r\n';
         }
         str = details+'\r\n'+str1
-            var exportedFilenmae =  hname+'-'+date+'/'+month+'/'+year+'.csv'
+            var exportedFilenmae =  hname+'-('+date+'-'+month+'-'+year+')'+'.csv'
             var blob = new Blob([str], { type: 'text/csv;charset=utf-8;' });
             if (navigator.msSaveBlob) { // IE 10+
                 navigator.msSaveBlob(blob, exportedFilenmae);
