@@ -1,4 +1,4 @@
-# hrisa
+# Hrisa
 
 A new Flutter application.
 
