@@ -1,0 +1,7 @@
+#Sun Aug 04 18:24:58 IST 2019
+base.0=G\:\\Med internship\\flutter-phoneAuth\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.1=classes2.dex
+renamed.1=classes2.dex
+path.0=classes.dex
+renamed.0=classes.dex
+base.1=G\:\\Med internship\\flutter-phoneAuth\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
